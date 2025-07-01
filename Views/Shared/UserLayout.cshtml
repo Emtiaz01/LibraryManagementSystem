@@ -1,0 +1,64 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>User Dashboard</title>
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Admin/plugins/fontawesome-free/css/all.min.css">
+    <!-- AdminLTE -->
+    <link rel="stylesheet" href="~/Admin/dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition layout-top-nav">
+    <div class="wrapper">
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+            <div class="container">
+                <!-- Project Name -->
+                <a href="~/" class="navbar-brand">
+                    
+                    <span class="brand-text font-weight-light">User Dashboard</span>
+                    <a class="navbar-brand" asp-area="" asp-controller="Category" asp-action="CreateCategory">Create Category</a>
+                </a>
+
+                <!-- Logout Button (Right Side) -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <form method="post" asp-area="Identity" asp-page="/Account/Logout" id="logoutForm">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="container pt-3">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="main-footer text-center">
+            <strong>&copy; 2025 <a href="#">Library Management</a>.</strong> All rights reserved.
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="~/Admin/plugins/jquery/jquery.min.js"></script>
+    <script src="~/Admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Admin/dist/js/adminlte.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using LibraryManagementSystem.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagementSystem.Data
@@ -9,5 +10,6 @@ namespace LibraryManagementSystem.Data
             : base(options)
         {
         }
+        public DbSet<Category> Category { get; set; }
     }
 }
