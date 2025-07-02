@@ -1,0 +1,20 @@
+﻿@* Delete Book *@
+@model LibraryManagementSystem.Models.Book
+@{
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+    ViewData["Title"] = "Delete Book";
+}
+
+<h2 class="text-danger">Delete Book</h2>
+
+<div class="alert alert-warning">
+    <p>Are you sure you want to delete the book titled <strong>@Model.Title</strong>?</p>
+</div>
+
+<form asp-action="DeleteBook" method="post">
+    <input type="hidden" asp-for="BookId" />
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>

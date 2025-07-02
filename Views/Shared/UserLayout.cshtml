@@ -25,18 +25,8 @@
                     
                     <span class="brand-text font-weight-light">User Dashboard</span>
                     <a class="navbar-brand" asp-area="" asp-controller="Category" asp-action="CreateCategory">Create Category</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Book" asp-action="Index">Books List</a>
                 </a>
-
-                <!-- Logout Button (Right Side) -->
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <form method="post" asp-area="Identity" asp-page="/Account/Logout" id="logoutForm">
-                            <button type="submit" class="btn btn-outline-danger btn-sm">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </button>
-                        </form>
-                    </li>
-                </ul>
             </div>
         </nav>
         <!-- /.navbar -->
@@ -59,6 +49,7 @@
     <script src="~/Admin/plugins/jquery/jquery.min.js"></script>
     <script src="~/Admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/Admin/dist/js/adminlte.min.js"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

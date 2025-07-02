@@ -1,0 +1,79 @@
+﻿@model LibraryManagementSystem.Models.Book
+@{
+    ViewData["Title"] = "Book Management";
+}
+
+<div class="col-12">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Book Management</h3>
+        </div>
+
+        <form asp-action="CreateBook" method="post" enctype="multipart/form-data">
+            <div class="card-body">
+                <div class="form-group">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control" placeholder="Enter book title" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Author"></label>
+                    <input asp-for="Author" class="form-control" placeholder="Enter author name" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ISBN"></label>
+                    <input asp-for="ISBN" class="form-control" placeholder="Enter ISBN" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PublisherName"></label>
+                    <input asp-for="PublisherName" class="form-control" placeholder="Enter publisher name" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PublishedDate"></label>
+                    <input asp-for="PublishedDate" class="form-control" type="date" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CoverImageURL">Cover Image URL</label>
+                    <input asp-for="CoverImageURL" class="form-control" placeholder="Enter image URL" />
+                    <small class="form-text text-muted">Or upload an image below</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Cover Image</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="bookCoverUpload">
+                            <label class="custom-file-label" for="bookCoverUpload">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="TotalCopies"></label>
+                            <input asp-for="TotalCopies" class="form-control" min="1" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="AvailableCopies"></label>
+                            <input asp-for="AvailableCopies" class="form-control" min="0" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-default float-right">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>
+
