@@ -1,67 +1,43 @@
-﻿@model IEnumerable<LibraryManagementSystem.Models.BookViewModel>
+﻿@model IEnumerable<LibraryManagementSystem.Models.Category>
 @{
     Layout = "~/Views/Shared/UserLayout.cshtml";
-    ViewData["Title"] = "Books List";
+    ViewData["Title"] = "Category List";
 }
 
-<h2 class="mb-4">Book List</h2>
+<h2 class="mb-4">Category List</h2>
 
 <div class="d-flex justify-content-end mb-3">
-    <a asp-action="CreateBook" class="btn btn-success">Add Book</a>
+    <a asp-action="CreateCategory" class="btn btn-success">Add Book</a>
 </div>
 
 <table class="table table-bordered table-hover text-center align-middle">
     <thead class="thead-dark">
         <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>ISBN</th>
-            <th>Publisher</th>
-            <th>Published Date</th>
-            <th>Total Copies</th>
-            <th>Available Copies</th>
+            <th>Category Id</th>
+            <th>Book Name</th>
             <th>Category Name</th>
-            <th>Borrow Records</th>
-            <th>Cover</th>
+            <th>Description</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         @if (Model != null && Model.Any())
         {
-            foreach (var book in Model)
+            foreach (var category in Model)
             {
                 <tr>
-                    <td>@book.Title</td>
-                    <td>@book.Author</td>
-                    <td>@book.ISBN</td>
-                    <td>@book.PublisherName</td>
-                    <td>@book.PublishedDate.ToString("dd/MM/yy")</td>
-                    <td>@book.TotalCopies</td>
-                    <td>@book.AvailableCopies</td>
-                    <td>@book.CategoryName</td>
-                    <td>@book.BorrowRecords.ToString("dd/MM/yy HH:mm")</td>
-                    <td>
-                        @if (!string.IsNullOrEmpty(book.CoverImageURL))
-                        {
-                            <img src="@book.CoverImageURL " alt="Cover" width="50" height="70" />
-                        }
-                        else
-                        {
-                            <span>No Image</span>
-                        }
-                    </td>
+                    <td>@category.CategoryId</td>
+                    <td>@category.BookName</td>
+                    <td>@category.CategoryName</td>
+                    <td>@category.Description</td>
                     <td>
                         <div class="d-flex justify-content-center">
-                            <a asp-action="EditBook" asp-route-id="@book.BookId" class="btn btn-sm btn-warning me-2">Edit</a>
-                            <button type="button" class="btn btn-sm btn-danger delete-btn" data-id="@book.BookId" data-title="@book.Title">
+                            <a asp-action="EditCategory" asp-route-id="@category.CategoryId" class="btn btn-sm btn-warning me-2">Edit</a>
+                            <button type="button" class="btn btn-sm btn-danger delete-btn" data-id="@category.CategoryId" data-title="@category.CategoryName">
                                 Delete
                             </button>
-
                         </div>
-
                     </td>
-
                 </tr>
             }
         }

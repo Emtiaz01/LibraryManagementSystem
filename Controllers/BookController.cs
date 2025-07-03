@@ -13,17 +13,45 @@ namespace LibraryManagementSystem.Controllers
             _context = context;
         }
 
-        // GET: Book list
         public IActionResult Index()
         {
-            var books = _context.Book.ToList();
-            return View(books);
+            var book = (from b in _context.Book
+                        join c in _context.Category on b.CategoryId equals c.CategoryId
+                        select new BookViewModel
+                        {
+                            BookId = b.BookId,
+                            Title = b.Title,
+                            Author = b.Author,
+                            ISBN = b.ISBN,
+                            PublisherName = b.PublisherName,
+                            PublishedDate = b.PublishedDate,
+                            TotalCopies = b.TotalCopies,
+                            AvailableCopies = b.AvailableCopies,
+                            CoverImageURL = b.CoverImageURL,
+                            BorrowRecords = b.BorrowRecords,
+                            CategoryId = b.CategoryId,
+                            CategoryName = c.CategoryName
+                        }).ToList();
+
+            return View(book);
         }
+
 
         // GET: Create Book page
         public IActionResult CreateBook()
         {
             return View();
+        }
+
+
+        // POST: Create Book
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateBook(Book book)
+        {
+            _context.Book.Add(book);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
         // GET: Edit Book
@@ -35,16 +63,6 @@ namespace LibraryManagementSystem.Controllers
                 return NotFound();
 
             return View(book);
-        }
-
-        // POST: Create Book
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateBook(Book book)
-        {
-            _context.Book.Add(book);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
         }
 
         // POST: Edit Book
