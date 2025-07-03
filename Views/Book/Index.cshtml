@@ -36,11 +36,11 @@
                     <td>@book.Author</td>
                     <td>@book.ISBN</td>
                     <td>@book.PublisherName</td>
-                    <td>@book.PublishedDate.ToString("yyyy-MM-dd")</td>
+                    <td>@book.PublishedDate.ToString("dd/MM/yy")</td>
                     <td>@book.TotalCopies</td>
                     <td>@book.AvailableCopies</td>
                     <td>@book.CategoryId</td>
-                    <td>@book.BorrowRecords.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@book.BorrowRecords.ToString("dd/MM/yy HH:mm")</td>
                     <td>
                         @if (!string.IsNullOrEmpty(book.CoverImageURL))
                         {
