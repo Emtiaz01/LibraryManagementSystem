@@ -1,6 +1,7 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using LibraryManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http; // ✅ Needed for session access
 
 namespace LibraryManagementSystem.Controllers
 {
@@ -15,15 +16,16 @@ namespace LibraryManagementSystem.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        //public IActionResult Privacy()
+        //{
+        //    return View();
+        //}
+
         public IActionResult Register()
-           
         {
             return View();
         }

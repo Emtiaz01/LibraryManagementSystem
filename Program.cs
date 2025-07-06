@@ -1,4 +1,4 @@
-using LibraryManagementSystem.Data;
+﻿using LibraryManagementSystem.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,12 +36,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); // still needed for login/register
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=User}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 

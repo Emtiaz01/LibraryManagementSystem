@@ -1,0 +1,50 @@
+﻿@* AddRecord.cshtml *@
+@model BorrowRecord
+@{
+    ViewData["Title"] = "Record Management";
+}
+
+<div class="col-12">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Borrow Record</h3>
+        </div>
+
+        <form asp-action="AddRecord" method="post" enctype="multipart/form-data">
+            <div class="card-body">
+
+                <div class="form-group">
+                    <label asp-for="BookId"></label>
+                    <input asp-for="BookId" class="form-control" placeholder="Enter Book Id" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="UserId"></label>
+                    <input asp-for="UserId" class="form-control" placeholder="Enter User Id" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="BorrowDate"></label>
+                    <input asp-for="BorrowDate" class="form-control" type="date" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ReturnDate"></label>
+                    <input asp-for="ReturnDate" class="form-control" type="date" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="DueDate"></label>
+                    <input asp-for="DueDate" class="form-control" type="date" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="FineAmount"></label>
+                    <input asp-for="FineAmount" class="form-control" min="0" />
+                </div>                            
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-default float-right">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>
+

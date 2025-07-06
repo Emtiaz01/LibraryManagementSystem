@@ -28,7 +28,7 @@ namespace LibraryManagementSystem.Controllers
                             TotalCopies = b.TotalCopies,
                             AvailableCopies = b.AvailableCopies,
                             CoverImageURL = b.CoverImageURL,
-                            BorrowRecords = b.BorrowRecords,
+                            BorrowRecords = _context.BorrowRecord.Where(br => br.BookId == b.BookId).ToList(),
                             CategoryId = b.CategoryId,
                             CategoryName = c.CategoryName
                         }).ToList();

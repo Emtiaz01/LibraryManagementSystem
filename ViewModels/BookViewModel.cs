@@ -1,4 +1,4 @@
-﻿//Book.cs
+﻿//BookViewModel.cs
 using System.ComponentModel.DataAnnotations;
 
 namespace LibraryManagementSystem.Models
@@ -17,6 +17,6 @@ namespace LibraryManagementSystem.Models
         public string CoverImageURL { get; set; }
         public int TotalCopies { get; set; }
         public int AvailableCopies { get; set; }
-        public DateTime BorrowRecords { get; set; }
+        public List<BorrowRecord> BorrowRecords { get; set; }
     }
 }
