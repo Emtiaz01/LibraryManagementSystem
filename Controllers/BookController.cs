@@ -1,6 +1,7 @@
 ﻿using LibraryManagementSystem.Data;
 using LibraryManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LibraryManagementSystem.Controllers
 {
@@ -40,6 +41,16 @@ namespace LibraryManagementSystem.Controllers
         // GET: Create Book page
         public IActionResult CreateBook()
         {
+            var categories = _context.Category
+                .Select(c => new SelectListItem
+                {
+                    Value = c.CategoryId.ToString(),
+                    Text = c.CategoryId.ToString()  
+                })
+                .ToList();
+
+            ViewBag.Category = categories;
+
             return View();
         }
 
@@ -61,6 +72,15 @@ namespace LibraryManagementSystem.Controllers
 
             if (book == null)
                 return NotFound();
+            var categories = _context.Category
+                .Select(c => new SelectListItem
+                {
+                    Value = c.CategoryId.ToString(),
+                    Text = c.CategoryId.ToString()
+                })
+                .ToList();
+
+            ViewBag.Category = categories;
 
             return View(book);
         }
@@ -91,7 +111,7 @@ namespace LibraryManagementSystem.Controllers
 
             _context.Book.Remove(book);
             _context.SaveChanges();
-            return Ok(); // For AJAX success
+            return Ok();
         }
     }
 }

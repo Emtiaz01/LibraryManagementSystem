@@ -55,8 +55,8 @@
                                             <li class="mb-2 p-2 rounded bg-light border border-1 border-secondary-subtle">
                                                 <span class="d-block"><strong>Borrowed:</strong> @record.BorrowDate.ToString("dd MMM yyyy")</span>
                                                 <span class="d-block"><strong>Return:</strong> @(record.ReturnDate != DateTime.MinValue ? record.ReturnDate.ToString("dd MMM yyyy") : "Not Returned")</span>
-                                                <span class="d-block"><strong>Due:</strong> @record.DueDate.ToString("dd MMM yyyy")</span>
-                                                <span class="d-block"><strong>Fine:</strong> $@record.FineAmount.ToString("0.00")</span>
+                                                @* <span class="d-block"><strong>Due:</strong> @record.DueDate.ToString("dd MMM yyyy")</span>
+                                                <span class="d-block"><strong>Fine:</strong> $@record.FineAmount.ToString("0.00")</span> *@
                                             </li>
                                         }
                                     </ul>
@@ -69,7 +69,7 @@
                             <td>
                                 @if (!string.IsNullOrEmpty(book.CoverImageURL))
                                 {
-                                    <img src="@book.CoverImageURL" alt="Cover" width="50" height="70" class="img-fluid" />
+                                    <img src="@book.CoverImageURL" alt="Cover" width="5000" height="4000" class="img-fluid rounded shadow-sm border border-1" />
                                 }
                                 else
                                 {

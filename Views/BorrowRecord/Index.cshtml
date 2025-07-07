@@ -19,8 +19,8 @@
             <th>User Id</th>
             <th>Borrow Date</th>
             <th>Return Date</th>
-            <th>Due Date</th>
-            <th>Fine Amount</th>
+            @* <th>Due Date</th>
+            <th>Fine Amount</th> *@
             <th>Action</th>
         </tr>
     </thead>
@@ -35,8 +35,8 @@
                     <td>@record.UserId</td>
                     <td>@record.BorrowDate.ToString("dd MMM yyyy")</td>
                     <td>@record.ReturnDate.ToString("dd MMM yyyy")</td>
-                    <td>@record.DueDate.ToString("dd MMM yyyy")</td>
-                    <td>@record.FineAmount</td>
+                    @* <td>@record.DueDate.ToString("dd MMM yyyy")</td>
+                    <td>@record.FineAmount</td> *@
                     <td>
                         <div class="d-flex flex-column gap-2">
                             <a asp-action="EditRecord" asp-route-id="@record.BorrowId" class="btn btn-sm btn-outline-warning w-100">Edit</a>

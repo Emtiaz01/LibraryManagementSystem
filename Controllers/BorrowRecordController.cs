@@ -2,6 +2,7 @@
 using LibraryManagementSystem.Data;
 using LibraryManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagementSystem.Controllers
@@ -24,6 +25,25 @@ namespace LibraryManagementSystem.Controllers
         //GET: Add Record
         public IActionResult AddRecord()
         {
+            var records = _context.Book
+                .Select(c => new SelectListItem
+                {
+                    Value = c.BookId.ToString(), 
+                    Text = c.BookId.ToString()   
+                })
+                .ToList();
+
+            ViewBag.Record = records;
+
+            //var users = _context.User
+            //    .Select(u => new SelectListItem
+            //    {
+            //Value = u.UserId.ToString(),
+            //Text = u.FullName // or u.UserName
+            //    })
+            //    .ToList();
+
+            //ViewBag.Users = users;
             return View();
         }
         // POST: Add Record
@@ -31,9 +51,34 @@ namespace LibraryManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddRecord(BorrowRecord record)
         {
-            _context.BorrowRecord.Add(record);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                
+                record.ReturnDate = record.BorrowDate.AddDays(15);
+
+                _context.BorrowRecord.Add(record);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+           
+            ViewBag.Record = _context.Book
+                .Select(c => new SelectListItem
+                {
+                    Value = c.BookId.ToString(),
+                    Text = c.BookId.ToString()
+                })
+                .ToList();
+
+            //ViewBag.Users = _context.User
+            //    .Select(u => new SelectListItem
+            //    {
+            //        Value = u.UserId.ToString(),
+            //        Text = u.FullName
+            //    })
+            //    .ToList();
+
+            return View(record);
         }
 
         // GET: Edit Record
