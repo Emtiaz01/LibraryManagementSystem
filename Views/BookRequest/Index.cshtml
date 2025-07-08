@@ -1,39 +1,39 @@
-﻿@model IEnumerable<LibraryManagementSystem.Models.Category>
+﻿@* BookRequest.index.cshtml *@
+@model IEnumerable<LibraryManagementSystem.Models.BookRequest>
 @{
     Layout = "~/Views/Shared/Admin_Layout.cshtml";
-    ViewData["Title"] = "Category List";
+  ViewData["Title"] = "Borrow Record";
 }
 
-<h2 class="mb-4">Category List</h2>
-
-<div class="d-flex justify-content-end mb-3">
-    <a asp-action="CreateCategory" class="btn btn-success">Add Category</a>
-</div>
+<h2 class="mb-4">Book Request</h2>
 
 <table class="table table-bordered table-hover text-center align-middle">
     <thead class="thead-dark">
         <tr>
-            <th>Category Id</th>
-            <th>Book Name</th>
-            <th>Category Name</th>
-            <th>Description</th>
-            <th>Actions</th>
+            <th>Request Id</th>
+            <th>User Id</th>
+            <th>Book Id</th>
+            <th>Request Date</th>
+            <th>Approval Action</th>
+            <th>Approval Date</th>
+            <th>Status</th>
         </tr>
     </thead>
-    <tbody>
+    @* <tbody>
         @if (Model != null && Model.Any())
         {
-            foreach (var category in Model)
+            foreach (var record in Model)
             {
                 <tr>
-                    <td>@category.CategoryId</td>
-                    <td>@category.BookName</td>
-                    <td>@category.CategoryName</td>
-                    <td>@category.Description</td>
+                    <td>@record.BorrowId</td>
+                    <td>@record.BookId</td>
+                    <td>@record.UserId</td>
+                    <td>@record.BorrowDate.ToString("dd MMM yyyy")</td>
+                    <td>@record.ReturnDate.ToString("dd MMM yyyy")</td>
                     <td>
                         <div class="d-flex flex-column gap-2">
-                            <a asp-action="EditCategory" asp-route-id="@category.CategoryId" class="btn btn-sm btn-outline-warning w-100">Edit</a>
-                            <button type="button" class="btn btn-sm btn-outline-danger w-100 delete-btn" data-id="@category.CategoryId" data-title="@category.CategoryName">
+                            <a asp-action="EditRecord" asp-route-id="@record.BorrowId" class="btn btn-sm btn-outline-warning w-100">Edit</a>
+                            <button type="button" class="btn btn-sm btn-outline-danger w-100 delete-btn" data-id="@record.BorrowId" data-title="@record.BorrowId">
                                 Delete
                             </button>
                         </div>
@@ -44,20 +44,19 @@
         else
         {
             <tr>
-                <td colspan="5">No categories available.</td> <!-- Fixed colspan -->
+                <td colspan="11">No Record available.</td>
             </tr>
         }
-    </tbody>
+    </tbody> *@
 </table>
-
 <!-- SweetAlert2 and jQuery CDN -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@* <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     $(document).ready(function () {
         $('.delete-btn').click(function () {
-            const categoryId = $(this).data('id');
+            const BorrowId = $(this).data('id');
             const title = $(this).data('title');
 
             Swal.fire({
@@ -71,9 +70,9 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '/Category/DeleteCategory',
+                        url: '/BorrowRecord/DeleteRecord',
                         type: 'POST',
-                        data: { id: categoryId },
+                        data: { id: BorrowId },
                         success: function () {
                             Swal.fire({
                                 icon: 'success',
@@ -93,4 +92,4 @@
             });
         });
     });
-</script>
+</script> *@

@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Admin Dashborad</title>
+    <title>Library Management System</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav ml-auto align-items-center">
-                        @if (SignInManager.IsSignedIn(User))
+                        @if (SignInManager.IsSignedIn(User)) 
                         {
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Category" asp-action="Index">
@@ -62,6 +62,7 @@
                                     </button>
                                 </form>
                             </li>
+                            
                         }
                         else
                         {
@@ -75,6 +76,7 @@
                                     <i class="fas fa-user-plus"></i> Register
                                 </a>
                             </li>
+                            
                         }
                     </ul>
                 </div>
@@ -89,11 +91,32 @@
                 </div>
             </div>
         </div>
+        @if (SignInManager.IsSignedIn(User))
+        {
 
-        <!-- Footer -->
+            <footer class="main-footer text-center small bg-white shadow-sm">
+                <strong>
+
+                    &copy; 2025 - All Rights Reserved
+                </strong>
+            </footer>
+        }
+        else
+        {
+            
+            <footer class="main-footer text-center small bg-white shadow-sm">
+                <strong>
+                    <a asp-controller="Admin" asp-action="Index">Admin</a> Login.
+                </strong>
+            </footer>
+        }
+
+        @* <!-- Footer -->
         <footer class="main-footer text-center small bg-white shadow-sm">
-            <strong>&copy; 2025 <a href="#">Library Management</a>.</strong> All rights reserved.
-        </footer>
+            <strong>
+                <a asp-controller="Admin" asp-action="Index">Admin</a> Login.
+            </strong>
+        </footer> *@
 
     </div>
 
