@@ -35,7 +35,7 @@
                     <ul class="navbar-nav ml-auto align-items-center">
                         @if (SignInManager.IsSignedIn(User)) 
                         {
-                            <li class="nav-item">
+                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Category" asp-action="Index">
                                     <i class="fas fa-plus-circle"></i>Categories
                                 </a>
@@ -49,7 +49,7 @@
                                 <a class="nav-link" asp-controller="BorrowRecord" asp-action="Index">
                                     <i class="fas fa-book"></i>Borrow Record
                                 </a>
-                            </li>
+                            </li> 
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">
                                     <i class="fas fa-user-circle"></i> Hello, @UserManager.GetUserName(User)!
@@ -91,8 +91,6 @@
                 </div>
             </div>
         </div>
-        @if (SignInManager.IsSignedIn(User))
-        {
 
             <footer class="main-footer text-center small bg-white shadow-sm">
                 <strong>
@@ -100,23 +98,6 @@
                     &copy; 2025 - All Rights Reserved
                 </strong>
             </footer>
-        }
-        else
-        {
-            
-            <footer class="main-footer text-center small bg-white shadow-sm">
-                <strong>
-                    <a asp-controller="Admin" asp-action="Index">Admin</a> Login.
-                </strong>
-            </footer>
-        }
-
-        @* <!-- Footer -->
-        <footer class="main-footer text-center small bg-white shadow-sm">
-            <strong>
-                <a asp-controller="Admin" asp-action="Index">Admin</a> Login.
-            </strong>
-        </footer> *@
 
     </div>
 

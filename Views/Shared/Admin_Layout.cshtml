@@ -1,8 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@*  @using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity 
+@{
+    // var isAdmin = Context.Session.GetString("IsAdmin") == "true";
+    // var adminEmail = Context.Session.GetString("AdminEmail");
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Admin Dashborad</title>
+    <title>Admin Dashboard</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap" rel="stylesheet">
@@ -15,8 +22,7 @@
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand-md navbar-light bg-white border-bottom shadow-sm">
             <div class="container">
-
-                <a href="~/" class="navbar-brand">
+                <a href="/" class="navbar-brand">
                     <i class="fas fa-book-reader mr-1"></i>
                     <span class="brand-text font-weight-bold">Library Management System</span>
                 </a>
@@ -27,6 +33,8 @@
 
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav ml-auto align-items-center">
+                       if (isAdmin)
+                        { 
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Category" asp-action="Index">
                                     <i class="fas fa-plus-circle"></i>Categories
@@ -42,11 +50,21 @@
                                     <i class="fas fa-book"></i>Borrow Record
                                 </a>
                             </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="BookRequest" asp-action="Index">
-                                <i class="fas fa-book"></i>Book Request
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="BookRequest" asp-action="Index">
+                                    <i class="fas fa-book"></i>Book Request
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Admin/UserList/Index">
+                                    <i class="fas fa-users"></i> User List
+                                </a>
+                            </li> 
+                            <li class="nav-item">
+                                <span class="nav-link text-primary">
+                                    <i class="fas fa-user-circle"></i> Hello, @adminEmail
+                                </span>
+                            </li>
                             <li class="nav-item">
                                 <form class="form-inline" method="post" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
                                     <button type="submit" class="btn btn-outline-dark btn-sm ml-2">
@@ -54,11 +72,12 @@
                                     </button>
                                 </form>
                             </li>
+                        
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- /.navbar -->
+
         <!-- Content Wrapper -->
         <div class="content-wrapper">
             <div class="content">
@@ -70,22 +89,14 @@
 
         <!-- Footer -->
         <footer class="main-footer text-center small bg-white shadow-sm">
-            <strong>
-
-                &copy; 2025 - All Rights Reserved
-            </strong>
+            <strong>&copy; 2025 - All Rights Reserved</strong>
         </footer>
-
     </div>
-    <!-- ./wrapper -->
-    <!-- jQuery -->
+
+    <!-- Scripts -->
     <script src="~/Admin/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
     <script src="~/Admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
     <script src="~/Admin/dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="~/Admin/dist/js/demo.js"></script>
-            @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 </body>
-</html>
+</html>  *@
