@@ -1,0 +1,125 @@
+﻿@* GuestBook/index.cshtml
+@model IEnumerable<LibraryManagementSystem.Models.BookViewModel>
+
+@{
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+    ViewData["Title"] = "Book List";
+} *@
+
+@* <div class="container-fluid px-3">
+    <h2 class="mb-4">Book List</h2>
+
+    <div class="d-flex justify-content-end mb-3">
+        <a asp-action="CreateBook" class="btn btn-success">Add Book</a>
+    </div>
+
+    <div class="table-responsive shadow-sm rounded-4 border border-2 border-light-subtle p-3 bg-white">
+        <table class="table table-hover align-middle text-center table-bordered">
+            <thead class="table-dark text-white">
+                <tr>
+                    <th scope="col">Book ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Publisher</th>
+                    <th scope="col">Published</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Available</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Cover</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var guest in Model)
+                    {
+                        <tr>
+                            <td class="fw-bold">@guest.BookId</td>
+                            <td>@guest.Title</td>
+                            <td>@guest.Author</td>
+                            <td>@guest.ISBN</td>
+                            <td>@guest.PublisherName</td>
+                            <td>@guest.PublishedDate.ToString("dd MMM yyyy")</td>
+                            <td>@guest.TotalCopies</td>
+                            <td>@guest.AvailableCopies</td>
+                            <td>@guest.CategoryName</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(guest.CoverImageURL))
+                                {
+                                    <img src="@guest.CoverImageURL" alt="Cover" width="5000" height="4000" class="img-fluid rounded shadow-sm border border-1" />
+                                }
+                                else
+                                {
+                                    <span>No Image</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="d-flex flex-column gap-2">
+                                    <a asp-action="EditBook" asp-route-id="@guest.BookId" class="btn btn-sm btn-outline-warning w-100">Edit</a>
+                                    <button type="button" class="btn btn-sm btn-outline-danger w-100 delete-btn" data-id="@guest.BookId" data-title="@guest.Title">
+                                        Delete
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="12" class="text-muted fst-italic">No books available.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</div>
+
+<!-- SweetAlert + jQuery -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.delete-btn').click(function () {
+            const bookId = $(this).data('id');
+            const title = $(this).data('title');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                html: `Do you want to delete <strong>${title}</strong>?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/Book/DeleteBook',
+                        type: 'POST',
+                        data: { id: bookId },
+                        success: function () {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Deleted!',
+                                text: `${title} has been deleted.`,
+                                timer: 1500,
+                                showConfirmButton: false
+                            }).then(() => {
+                                location.reload();
+                            });
+                        },
+                        error: function () {
+                            Swal.fire('Error!', 'Something went wrong.', 'error');
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script> *@

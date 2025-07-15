@@ -1,0 +1,26 @@
+﻿
+@model IEnumerable<LibraryManagementSystem.ViewModels.UserRoleViewModel>
+@{
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+    ViewData["Title"] = "User List";
+}
+
+<h2 class="mb-4">User List</h2>
+
+<table class="table table-bordered table-hover text-center align-middle">
+    <thead class="thead-dark">
+        <tr>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
+    </thead> 
+    <tbody>
+            @foreach(var user in Model)
+            {
+                <tr>
+                    <td>@user.Email</td>
+                <td>@string.Join(", ", user.Roles)</td>
+                </tr>
+        }
+    </tbody>
+</table>

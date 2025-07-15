@@ -1,111 +1,144 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+﻿@using Microsoft.AspNetCore.Identity  
+@inject SignInManager<IdentityUser> SignInManager  
+@inject UserManager<IdentityUser> UserManager  
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>Library Management System</title>
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="utf-8" />  
+    <title>Library Management System</title>  
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="~/Admin/plugins/fontawesome-free/css/all.min.css" />
-    <!-- AdminLTE -->
-    <link rel="stylesheet" href="~/Admin/dist/css/adminlte.min.css" />
-</head>
-<body class="hold-transition layout-top-nav">
-    <div class="wrapper">
+    <!-- Google Font -->  
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap" rel="stylesheet">  
+    <!-- Font Awesome -->  
+    <link rel="stylesheet" href="~/Admin/plugins/fontawesome-free/css/all.min.css" />  
+    <!-- AdminLTE -->  
+    <link rel="stylesheet" href="~/Admin/dist/css/adminlte.min.css" />  
+</head>  
+<body class="hold-transition layout-top-nav">  
+    <div class="wrapper">  
 
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand-md navbar-light bg-white border-bottom shadow-sm">
-            <div class="container">
+        <!-- Navbar -->  
+        <nav class="main-header navbar navbar-expand-md navbar-light bg-white border-bottom shadow-sm">  
+            <div class="container">  
 
-                <a href="~/" class="navbar-brand">
-                    <i class="fas fa-book-reader mr-1"></i>
-                    <span class="brand-text font-weight-bold">Library Management System</span>
-                </a>
+                <a href="~/" class="navbar-brand">  
+                    <i class="fas fa-book-reader mr-1"></i>  
+                    <span class="brand-text font-weight-bold">Library Management System</span>  
+                </a>  
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">  
+                    <span class="navbar-toggler-icon"></span>  
+                </button>  
 
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav ml-auto align-items-center">
-                        @if (SignInManager.IsSignedIn(User)) 
+                <div class="collapse navbar-collapse" id="navbarCollapse">  
+                    <ul class="navbar-nav ml-auto align-items-center">  
+                       
+                        @if (SignInManager.IsSignedIn(User))  
+                        {  
+                            @if (User.IsInRole("Admin"))  
+                            {  
+                                <li class="nav-item">  
+                                    <a class="nav-link" asp-controller="Category" asp-action="Index">  
+                                        <i class="fas fa-plus-circle"></i>Categories  
+                                    </a>  
+                                </li>  
+                                <li class="nav-item">  
+                                    <a class="nav-link" asp-controller="Book" asp-action="Index">  
+                                        <i class="fas fa-book"></i>Books  
+                                    </a>  
+                                </li>  
+                                <li class="nav-item">  
+                                    <a class="nav-link" asp-controller="BorrowRecord" asp-action="Index">  
+                                        <i class="fas fa-book"></i>Borrow Record  
+                                    </a>  
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="User" asp-action="UserDetail">
+                                        <i class="fas fa-book"></i>User Details
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">
+                                        <i class="fas fa-user-circle"></i> Hello, @UserManager.GetUserName(User)!
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <form class="form-inline" method="post" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
+                                        <button type="submit" class="btn btn-outline-dark btn-sm ml-2">
+                                            <i class="fas fa-sign-out-alt"></i> Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Book" asp-action="Index">
+                                        <i class="fas fa-book"></i>Books
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">
+                                        <i class="fas fa-user-circle"></i> Hello, @UserManager.GetUserName(User)!
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <form class="form-inline" method="post" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
+                                        <button type="submit" class="btn btn-outline-dark btn-sm ml-2">
+                                            <i class="fas fa-sign-out-alt"></i> Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            }
+                           
+                        }  
+                        else  
                         {
-                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Category" asp-action="Index">
-                                    <i class="fas fa-plus-circle"></i>Categories
-                                </a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Book" asp-action="Index">
                                     <i class="fas fa-book"></i>Books
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="BorrowRecord" asp-action="Index">
-                                    <i class="fas fa-book"></i>Borrow Record
-                                </a>
-                            </li> 
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">
-                                    <i class="fas fa-user-circle"></i> Hello, @UserManager.GetUserName(User)!
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <form class="form-inline" method="post" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
-                                    <button type="submit" class="btn btn-outline-dark btn-sm ml-2">
-                                        <i class="fas fa-sign-out-alt"></i> Logout
-                                    </button>
-                                </form>
-                            </li>
-                            
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">
-                                    <i class="fas fa-sign-in-alt"></i> Login
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">
-                                    <i class="fas fa-user-plus"></i> Register
-                                </a>
-                            </li>
-                            
-                        }
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- /.navbar -->
-        <!-- Content Wrapper -->
-        <div class="content-wrapper">
-            <div class="content">
-                <div class="container py-4">
-                    @RenderBody()
-                </div>
-            </div>
-        </div>
+                            <li class="nav-item">  
+                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">  
+                                    <i class="fas fa-sign-in-alt"></i> Login  
+                                </a>  
+                            </li>  
+                            <li class="nav-item">  
+                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">  
+                                    <i class="fas fa-user-plus"></i> Register  
+                                </a>  
+                            </li>  
+                        }  
+                    </ul>  
+                </div>  
+            </div>  
+        </nav>  
+        <!-- /.navbar -->  
+        <!-- Content Wrapper -->  
+        <div class="content-wrapper">  
+            <div class="content">  
+                <div class="container py-4">  
+                    @RenderBody()  
+                </div>  
+            </div>  
+        </div>  
 
-            <footer class="main-footer text-center small bg-white shadow-sm">
-                <strong>
+        <footer class="main-footer text-center small bg-white shadow-sm">  
+            <strong>  
+                &copy; 2025 - All Rights Reserved  
+            </strong>  
+        </footer>  
 
-                    &copy; 2025 - All Rights Reserved
-                </strong>
-            </footer>
+    </div>  
 
-    </div>
+    <!-- Scripts -->  
+    <script src="~/Admin/plugins/jquery/jquery.min.js"></script>  
+    <script src="~/Admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>  
+    <script src="~/Admin/dist/js/adminlte.min.js"></script>  
 
-    <!-- Scripts -->
-    <script src="~/Admin/plugins/jquery/jquery.min.js"></script>
-    <script src="~/Admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/Admin/dist/js/adminlte.min.js"></script>
-
-    @RenderSection("Scripts", required: false)
-</body>
+    @RenderSection("Scripts", required: false)  
+</body>  
 </html>

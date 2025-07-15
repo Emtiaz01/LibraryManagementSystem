@@ -1,11 +1,13 @@
-﻿@* Book/index.cshtml *@
+﻿@* Book/index.cshtml *@ 
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
 @model IEnumerable<LibraryManagementSystem.Models.BookViewModel>
 
 @{
     Layout = "~/Views/Shared/UserLayout.cshtml";
     ViewData["Title"] = "Book List";
 }
-
 <div class="container-fluid px-3">
     <h2 class="mb-4">Book List</h2>
 
@@ -26,9 +28,20 @@
                     <th scope="col">Total</th>
                     <th scope="col">Available</th>
                     <th scope="col">Category</th>
-                    <th scope="col">Borrow Records</th>
-                    <th scope="col">Cover</th>
-                    <th scope="col">Actions</th>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <th scope="col">Borrow Records</th>
+                        <th scope="col">Cover</th>
+                        <th scope="col">Actions</th>
+
+                    }
+                    else
+                    {
+                        <th scope="col">Cover</th>
+                        <th scope="col">Actions</th>
+                    }
+                    @* <th scope="col">Borrow Records</th> *@
+                    
                 </tr>
             </thead>
             <tbody>
@@ -46,7 +59,40 @@
                             <td>@book.TotalCopies</td>
                             <td>@book.AvailableCopies</td>
                             <td>@book.CategoryName</td>
-                            <td class="text-start">
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <td class="text-start">
+                                    @if (book.BorrowRecords != null && book.BorrowRecords.Any())
+                                    {
+                                        <ul class="list-unstyled">
+                                            @foreach (var record in book.BorrowRecords)
+                                            {
+                                                <li class="mb-2 p-2 rounded bg-light border border-1 border-secondary-subtle">
+                                                    <span class="d-block"><strong>Borrowed:</strong> @record.BorrowDate.ToString("dd MMM yyyy")</span>
+                                                    <span class="d-block"><strong>Return:</strong> @(record.ReturnDate != DateTime.MinValue ? record.ReturnDate.ToString("dd MMM yyyy") : "Not Returned")</span>
+                                                    @* <span class="d-block"><strong>Due:</strong> @record.DueDate.ToString("dd MMM yyyy")</span>
+                                                <span class="d-block"><strong>Fine:</strong> $@record.FineAmount.ToString("0.00")</span> *@
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted fst-italic">No Records</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(book.CoverImageURL))
+                                    {
+                                        <img src="@book.CoverImageURL" alt="Cover" width="5000" height="4000" class="img-fluid rounded shadow-sm border border-1" />
+                                    }
+                                    else
+                                    {
+                                        <span>No Image</span>
+                                    }
+                                </td>
+                            }
+                            @* <td class="text-start">
                                 @if (book.BorrowRecords != null && book.BorrowRecords.Any())
                                 {
                                     <ul class="list-unstyled">
@@ -56,7 +102,7 @@
                                                 <span class="d-block"><strong>Borrowed:</strong> @record.BorrowDate.ToString("dd MMM yyyy")</span>
                                                 <span class="d-block"><strong>Return:</strong> @(record.ReturnDate != DateTime.MinValue ? record.ReturnDate.ToString("dd MMM yyyy") : "Not Returned")</span>
                                                 @* <span class="d-block"><strong>Due:</strong> @record.DueDate.ToString("dd MMM yyyy")</span>
-                                                <span class="d-block"><strong>Fine:</strong> $@record.FineAmount.ToString("0.00")</span> *@
+                                                <span class="d-block"><strong>Fine:</strong> $@record.FineAmount.ToString("0.00")</span> 
                                             </li>
                                         }
                                     </ul>
@@ -65,7 +111,7 @@
                                 {
                                     <span class="text-muted fst-italic">No Records</span>
                                 }
-                            </td>
+                            </td> *@
                             <td>
                                 @if (!string.IsNullOrEmpty(book.CoverImageURL))
                                 {
